@@ -1,0 +1,2 @@
+export { LessonReservedListPageTemplate } from "./LessonReservedPageTemplate";
+
