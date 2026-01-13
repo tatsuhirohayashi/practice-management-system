@@ -1,0 +1,13 @@
+# Laravel Scheduler Cron Job
+# This file should be added to the server's crontab using: crontab -e
+# Or install it using: crontab crontab
+
+# Run Laravel scheduler every minute
+# IMPORTANT: Replace /path-to-your-project/backend/src with the actual absolute path to your project's backend/src directory
+* * * * * cd /path-to-your-project/backend/src && php artisan schedule:run >> /dev/null 2>&1
+
+# Examples:
+# Development: /Users/username/practice-management-system/backend/src
+# Production: /var/www/html/backend/src
+# Docker: /app/backend/src
+
