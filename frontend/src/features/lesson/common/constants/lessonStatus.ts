@@ -97,20 +97,21 @@ export interface StatusFilterOption {
 /**
  * コーチ側の予約済みレッスンのステータスフィルターオプション
  */
-export const COACH_RESERVED_LESSON_STATUS_FILTER_OPTIONS: StatusFilterOption[] = [
-  { value: "all", label: "すべて" },
-  { value: "finished", label: "終了" },
-  { value: "confirmed", label: "確定" },
-  { value: "unconfirmed", label: "未確定" },
-] as const;
+export const COACH_RESERVED_LESSON_STATUS_FILTER_OPTIONS: StatusFilterOption[] =
+  [
+    { value: "all", label: "すべて" },
+    { value: "finished", label: "終了" },
+    { value: "confirmed", label: "確定" },
+    { value: "unconfirmed", label: "未確定" },
+  ] as const;
 
 /**
  * コーチ側の未予約レッスンのステータスフィルターオプション
  */
-export const COACH_NOT_RESERVED_LESSON_STATUS_FILTER_OPTIONS: StatusFilterOption[] = [
-  { value: "all", label: "すべて" },
-  { value: "finished", label: "終了" },
-  { value: "reserved", label: "予約済み" },
-  { value: "not_reserved", label: "未予約" },
-] as const;
-
+export const COACH_NOT_RESERVED_LESSON_STATUS_FILTER_OPTIONS: StatusFilterOption[] =
+  [
+    { value: "all", label: "すべて" },
+    { value: "finished", label: "終了" },
+    { value: "reserved", label: "予約済み" },
+    { value: "not_reserved", label: "未予約" },
+  ] as const;

@@ -142,7 +142,8 @@ export function ClientManagementPresenter({
                 className="border border-gray-300 px-4 py-2 rounded"
               >
                 <span className="text-base">
-                  ⚫︎{formatUserNameFromUser(client, { withHonorific: true })}　{client.email}
+                  ⚫︎{formatUserNameFromUser(client, { withHonorific: true })}　
+                  {client.email}
                 </span>
               </div>
             ))}
@@ -152,4 +153,3 @@ export function ClientManagementPresenter({
     </div>
   );
 }
-

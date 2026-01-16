@@ -8,4 +8,3 @@ export function useClientListQuery() {
     queryFn: () => listCoachClientQueryAction(),
   });
 }
-

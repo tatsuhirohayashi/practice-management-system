@@ -1,7 +1,9 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { notReserveCommandAction } from "@/external/handler/lesson/coach/lesson.command.action";
-import { coachNotReservedLessonKeys } from "@/features/lesson/queries/keys";
-import { coachReservedLessonKeys } from "@/features/lesson/queries/keys";
+import {
+  coachNotReservedLessonKeys,
+  coachReservedLessonKeys,
+} from "@/features/lesson/queries/keys";
 
 export function useNotReserveReservedLessonMutation() {
   const queryClient = useQueryClient();

@@ -38,7 +38,13 @@ export const auth = betterAuth({
    */
   providers: {
     credentials: {
-      async authorize({ email, password }) {
+      async authorize({
+        email,
+        password,
+      }: {
+        email: string;
+        password: string;
+      }) {
         /**
          * ここで本来は
          * - Laravel管理DBを参照

@@ -38,6 +38,11 @@ export const removeAxiosAuthentication = () => {
 
 export default apiClient;
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const isAxiosError = (error: any): error is AxiosError =>
-  !!error.isAxiosError;
+export const isAxiosError = (error: unknown): error is AxiosError => {
+  return (
+    typeof error === "object" &&
+    error !== null &&
+    "isAxiosError" in error &&
+    (error as { isAxiosError: unknown }).isAxiosError === true
+  );
+};

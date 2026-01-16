@@ -1,5 +1,6 @@
 "use client";
 
+import type { Route } from "next";
 import Link from "next/link";
 import { Button } from "@/shared/components/ui/button";
 
@@ -13,7 +14,7 @@ export function HeaderPresenter({ onSignOut, homeLink }: HeaderPresenterProps) {
     <header className="sticky top-0 z-50 w-full bg-blue-400">
       <div className="flex h-16 items-center justify-between">
         <div className="pl-5">
-          <Link href={homeLink} className="flex items-center">
+          <Link href={homeLink as Route} className="flex items-center">
             <span className="font-bold text-lg text-white">TennisPat</span>
           </Link>
         </div>

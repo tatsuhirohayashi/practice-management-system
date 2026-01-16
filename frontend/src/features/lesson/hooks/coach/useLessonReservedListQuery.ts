@@ -8,4 +8,3 @@ export function useLessonReservedListQuery() {
     queryFn: () => listCoachReservedLessonQueryAction(),
   });
 }
-

@@ -3,15 +3,15 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import type { NotReservedLessonType } from "@/features/lesson/type";
-import { useLessonNotReservedListQuery } from "@/features/lesson/hooks/client/useLessonNotReservedListQuery";
+import {
+  combineLessonDateTime,
+  separateLessonDateTime,
+} from "@/features/lesson/common/utils";
 import { useCreateNotReservedLessonsMutation } from "@/features/lesson/hooks/client/useCreateNotReservedLessonsMutation";
 import { useDeleteNotReservedLessonMutation } from "@/features/lesson/hooks/client/useDeleteNotReservedLessonMutation";
+import { useLessonNotReservedListQuery } from "@/features/lesson/hooks/client/useLessonNotReservedListQuery";
 import { useUpdateNotReservedLessonMutation } from "@/features/lesson/hooks/client/useUpdateNotReservedLessonMutation";
-import {
-  separateLessonDateTime,
-  combineLessonDateTime,
-} from "@/features/lesson/common/utils";
+import type { NotReservedLessonType } from "@/features/lesson/type";
 import { type LessonFormData, lessonFormSchema } from "./schema";
 
 // 一時的なレッスン（作成前）の型
@@ -31,7 +31,8 @@ export function useLessonNotReservedList() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
   const [editingLessonId, setEditingLessonId] = useState<number | null>(null);
-  const [selectedLessonForDelete, setSelectedLessonForDelete] = useState<NotReservedLessonType | null>(null);
+  const [selectedLessonForDelete, setSelectedLessonForDelete] =
+    useState<NotReservedLessonType | null>(null);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [draftLessons, setDraftLessons] = useState<DraftLesson[]>([]);
 
@@ -87,7 +88,6 @@ export function useLessonNotReservedList() {
     setIsModalOpen(true);
   };
 
-
   const closeModal = () => {
     reset();
     setIsModalOpen(false);
@@ -97,7 +97,10 @@ export function useLessonNotReservedList() {
   };
 
   const addDraftLesson = (formData: LessonFormData) => {
-    const combinedDateTime = combineLessonDateTime(formData.lesson_day, formData.lesson_time);
+    const combinedDateTime = combineLessonDateTime(
+      formData.lesson_day,
+      formData.lesson_time,
+    );
 
     // 8件の制限チェック
     if (draftLessons.length >= 8) {
@@ -112,13 +115,13 @@ export function useLessonNotReservedList() {
     const isDuplicateInDrafts = draftLessons.some(
       (draft) => draft.lesson_day === combinedDateTime,
     );
-    
+
     // 重複チェック：APIから取得した既存のレッスン候補と同じ日時がないか確認
     const existingLessons = data?.data ?? [];
     const isDuplicateInExisting = existingLessons.some(
       (lesson) => lesson.lesson_day === combinedDateTime,
     );
-    
+
     if (isDuplicateInDrafts) {
       setError("root", {
         type: "manual",
@@ -126,7 +129,7 @@ export function useLessonNotReservedList() {
       });
       return;
     }
-    
+
     if (isDuplicateInExisting) {
       setError("root", {
         type: "manual",
@@ -134,7 +137,7 @@ export function useLessonNotReservedList() {
       });
       return;
     }
-    
+
     const draftLesson: DraftLesson = {
       id: crypto.randomUUID(),
       lesson_day: combinedDateTime,
@@ -160,7 +163,10 @@ export function useLessonNotReservedList() {
     if (isEditMode && editingLessonId !== null) {
       // 更新の場合
       const request = {
-        lesson_day: combineLessonDateTime(formData.lesson_day, formData.lesson_time),
+        lesson_day: combineLessonDateTime(
+          formData.lesson_day,
+          formData.lesson_time,
+        ),
         lesson_time: formData.lesson_time,
         lesson_location: formData.lesson_location || null,
         lesson_memo: formData.lesson_memo || null,
@@ -251,4 +257,3 @@ export function useLessonNotReservedList() {
     handleCreateAllDraftLessons,
   };
 }
-

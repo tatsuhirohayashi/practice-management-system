@@ -2,6 +2,12 @@
 
 import { useState } from "react";
 import type { FieldErrors, UseFormRegister } from "react-hook-form";
+import { COACH_NOT_RESERVED_LESSON_STATUS_FILTER_OPTIONS } from "@/features/lesson/common/constants";
+import {
+  formatLessonDate,
+  formatLessonTimeRange,
+  getCoachNotReservedLessonStatusBadge,
+} from "@/features/lesson/common/utils";
 import type { NotReservedLessonType } from "@/features/lesson/type";
 import { FormLabel } from "@/shared/components/custom";
 import { BasicModal } from "@/shared/components/modal/BasicModal";
@@ -20,12 +26,6 @@ import {
 import { Textarea } from "@/shared/components/ui/textarea";
 import { formatDate } from "@/shared/lib/date";
 import { formatUserNameFromUser } from "@/shared/lib/user";
-import {
-  formatLessonDate,
-  formatLessonTimeRange,
-  getCoachNotReservedLessonStatusBadge,
-} from "@/features/lesson/common/utils";
-import { COACH_NOT_RESERVED_LESSON_STATUS_FILTER_OPTIONS } from "@/features/lesson/common/constants";
 import type { ReserveFormData } from "./schema";
 
 interface LessonNotReservedListPresenterProps {
@@ -164,10 +164,16 @@ export function LessonNotReservedListPresenter({
               if (selectedStatus === "finished" && !lesson.is_finished) {
                 return false;
               }
-              if (selectedStatus === "reserved" && (!lesson.is_reserved || lesson.is_finished)) {
+              if (
+                selectedStatus === "reserved" &&
+                (!lesson.is_reserved || lesson.is_finished)
+              ) {
                 return false;
               }
-              if (selectedStatus === "not_reserved" && (lesson.is_reserved || lesson.is_finished)) {
+              if (
+                selectedStatus === "not_reserved" &&
+                (lesson.is_reserved || lesson.is_finished)
+              ) {
                 return false;
               }
             }
@@ -183,7 +189,8 @@ export function LessonNotReservedListPresenter({
           }
 
           return filteredLessons.map((reservedNotLesson) => {
-            const statusBadge = getCoachNotReservedLessonStatusBadge(reservedNotLesson);
+            const statusBadge =
+              getCoachNotReservedLessonStatusBadge(reservedNotLesson);
             const userName = formatUserNameFromUser(reservedNotLesson.user, {
               withHonorific: true,
             });
@@ -311,4 +318,3 @@ export function LessonNotReservedListPresenter({
     </div>
   );
 }
-

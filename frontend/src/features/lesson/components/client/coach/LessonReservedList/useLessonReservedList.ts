@@ -1,10 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import type { ReservedLessonType } from "@/features/lesson/type";
 import { useCancelCoachReservedLessonMutation } from "@/features/lesson/hooks/coach/useCancelCoachReservedLessonMutation";
 import { useLessonReservedListQuery } from "@/features/lesson/hooks/coach/useLessonReservedListQuery";
 import { useNotReserveReservedLessonMutation } from "@/features/lesson/hooks/coach/useNotReserveReservedLessonMutation";
+import type { ReservedLessonType } from "@/features/lesson/type";
 
 export function useLessonReservedList() {
   const { data, isLoading } = useLessonReservedListQuery();
@@ -72,4 +72,3 @@ export function useLessonReservedList() {
     handleCancel,
   };
 }
-

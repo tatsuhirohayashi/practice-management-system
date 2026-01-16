@@ -1,33 +1,26 @@
 "use client";
 
+import type { Route } from "next";
 import Link from "next/link";
 import type { useForm } from "react-hook-form";
+import {
+  CONDITION_STATUS,
+  feelingOptions,
+  motivationOptions,
+  muslePainOptions,
+  tiredOptions,
+} from "@/features/condition/common/constants";
+import { isLessonTodayOrAfter } from "@/features/condition/common/utils";
 import type { ConditionLessonType } from "@/features/condition/type";
 import { FormLabel } from "@/shared/components/custom";
 import { BasicModal } from "@/shared/components/modal/BasicModal";
-import { clientRoutes } from "@/shared/navigation";
 import { Badge } from "@/shared/components/ui/badge";
 import { Button } from "@/shared/components/ui/button";
 import { Card, CardContent } from "@/shared/components/ui/card";
-import { Input } from "@/shared/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/shared/components/ui/select";
 import { Textarea } from "@/shared/components/ui/textarea";
 import { formatDate, formatLessonDetailDateTime } from "@/shared/lib/date";
 import { formatUserNameFromUser } from "@/shared/lib/user";
-import {
-  muslePainOptions,
-  motivationOptions,
-  feelingOptions,
-  tiredOptions,
-  CONDITION_STATUS,
-} from "@/features/condition/common/constants";
-import { isLessonTodayOrAfter } from "@/features/condition/common/utils";
+import { clientRoutes } from "@/shared/navigation";
 import { ConditionRadioGroupField } from "../ConditionRadioGroupField/ConditionRadioGroupField";
 
 type ConditionFormData = {
@@ -67,17 +60,17 @@ const getActionButton = (
 ) => {
   if (lesson.has_condition && lesson.condition_id !== null) {
     return (
-      <Link href={clientRoutes.condition.detail(lesson.condition_id)}>
+      <Link href={clientRoutes.condition.detail(lesson.condition_id) as Route}>
         <Button className="bg-blue-500 text-sm text-white">詳細</Button>
       </Link>
     );
   }
-  
+
   // レッスン当日以降の場合のみ「記載」ボタンを表示
   if (!isLessonTodayOrAfter(lesson.lesson_day)) {
     return null;
   }
-  
+
   return (
     <Button
       className="bg-blue-500 text-sm text-white"
@@ -119,39 +112,39 @@ export function ConditionListPresenter({
             </div>
           ) : (
             conditionLessons.map((conditionLesson) => {
-            const statusBadge = getStatusBadge(conditionLesson);
-            const userName = formatUserNameFromUser(conditionLesson.user, {
-              withHonorific: true,
-            });
+              const statusBadge = getStatusBadge(conditionLesson);
+              const userName = formatUserNameFromUser(conditionLesson.user, {
+                withHonorific: true,
+              });
 
-            return (
-              <Card key={conditionLesson.id} className="rounded-lg border-2">
-                <CardContent className="flex items-center">
-                  {/* ステータスパート */}
-                  <div className="w-1/8 flex justify-center">
-                    <Badge className={statusBadge.className}>
-                      {statusBadge.text}
-                    </Badge>
-                  </div>
-                  {/* 予約内容パート */}
-                  <div className="flex-1 space-y-2">
-                    <div className="flex space-x-6">
-                      <div>{formatDate(conditionLesson.lesson_day)}</div>
-                      <div>{userName}</div>
-                      <div>{conditionLesson.lesson_location}</div>
+              return (
+                <Card key={conditionLesson.id} className="rounded-lg border-2">
+                  <CardContent className="flex items-center">
+                    {/* ステータスパート */}
+                    <div className="w-1/8 flex justify-center">
+                      <Badge className={statusBadge.className}>
+                        {statusBadge.text}
+                      </Badge>
                     </div>
-                    <div>
-                      <div>備考 {conditionLesson.lesson_memo || ""}</div>
+                    {/* 予約内容パート */}
+                    <div className="flex-1 space-y-2">
+                      <div className="flex space-x-6">
+                        <div>{formatDate(conditionLesson.lesson_day)}</div>
+                        <div>{userName}</div>
+                        <div>{conditionLesson.lesson_location}</div>
+                      </div>
+                      <div>
+                        <div>備考 {conditionLesson.lesson_memo || ""}</div>
+                      </div>
                     </div>
-                  </div>
-                  {/* アクションボタンパート */}
-                  <div className="w-1/8 flex justify-center">
-                    {getActionButton(conditionLesson, openCreateModal)}
-                  </div>
-                </CardContent>
-              </Card>
-            );
-          })
+                    {/* アクションボタンパート */}
+                    <div className="w-1/8 flex justify-center">
+                      {getActionButton(conditionLesson, openCreateModal)}
+                    </div>
+                  </CardContent>
+                </Card>
+              );
+            })
           )}
         </div>
       </div>
@@ -236,4 +229,3 @@ export function ConditionListPresenter({
     </>
   );
 }
-

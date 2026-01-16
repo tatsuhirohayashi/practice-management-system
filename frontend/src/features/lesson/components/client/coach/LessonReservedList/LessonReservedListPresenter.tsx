@@ -1,11 +1,13 @@
 "use client";
 
+import type { Route } from "next";
 import Link from "next/link";
 import { useState } from "react";
+import { COACH_RESERVED_LESSON_STATUS_FILTER_OPTIONS } from "@/features/lesson/common/constants";
+import { getCoachReservedLessonStatusBadge } from "@/features/lesson/common/utils";
 import type { ReservedLessonType } from "@/features/lesson/type";
 import { FormLabel } from "@/shared/components/custom";
 import { ConfirmModal } from "@/shared/components/modal/ConfirmModal";
-import { coachRoutes } from "@/shared/navigation";
 import { Badge } from "@/shared/components/ui/badge";
 import { Button } from "@/shared/components/ui/button";
 import { Card, CardContent } from "@/shared/components/ui/card";
@@ -18,8 +20,7 @@ import {
 } from "@/shared/components/ui/select";
 import { formatDate } from "@/shared/lib/date";
 import { formatUserNameFromUser } from "@/shared/lib/user";
-import { getCoachReservedLessonStatusBadge } from "@/features/lesson/common/utils";
-import { COACH_RESERVED_LESSON_STATUS_FILTER_OPTIONS } from "@/features/lesson/common/constants";
+import { coachRoutes } from "@/shared/navigation";
 
 interface LessonReservedListPresenterProps {
   reservedLessons: ReservedLessonType[];
@@ -44,7 +45,7 @@ const getActionButtons = (
 ) => {
   if (lesson.is_finished) {
     return (
-      <Link href={coachRoutes.conditionReview.detail(lesson.id)}>
+      <Link href={coachRoutes.conditionReview.detail(lesson.id) as Route}>
         <Button className="bg-blue-300 text-sm text-white">振り返り</Button>
       </Link>
     );
@@ -58,7 +59,7 @@ const getActionButtons = (
         >
           キャンセル
         </Button>
-        <Link href={coachRoutes.conditionReview.detail(lesson.id)}>
+        <Link href={coachRoutes.conditionReview.detail(lesson.id) as Route}>
           <Button className="bg-sky-500 text-sm text-white">
             コンディション
           </Button>
@@ -160,10 +161,16 @@ export function LessonReservedListPresenter({
               if (selectedStatus === "finished" && !lesson.is_finished) {
                 return false;
               }
-              if (selectedStatus === "confirmed" && (!lesson.is_confirmed || lesson.is_finished)) {
+              if (
+                selectedStatus === "confirmed" &&
+                (!lesson.is_confirmed || lesson.is_finished)
+              ) {
                 return false;
               }
-              if (selectedStatus === "unconfirmed" && (lesson.is_confirmed || lesson.is_finished)) {
+              if (
+                selectedStatus === "unconfirmed" &&
+                (lesson.is_confirmed || lesson.is_finished)
+              ) {
                 return false;
               }
             }
@@ -179,7 +186,8 @@ export function LessonReservedListPresenter({
           }
 
           return filteredLessons.map((reservedLesson) => {
-            const statusBadge = getCoachReservedLessonStatusBadge(reservedLesson);
+            const statusBadge =
+              getCoachReservedLessonStatusBadge(reservedLesson);
             const userName = formatUserNameFromUser(reservedLesson.user, {
               withHonorific: true,
             });
@@ -247,4 +255,3 @@ export function LessonReservedListPresenter({
     </div>
   );
 }
-

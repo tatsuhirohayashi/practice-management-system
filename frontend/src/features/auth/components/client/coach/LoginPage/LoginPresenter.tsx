@@ -3,9 +3,9 @@
 import Link from "next/link";
 import type { useForm } from "react-hook-form";
 import { FormLabel } from "@/shared/components/custom";
-import { coachRoutes } from "@/shared/navigation";
 import { Button } from "@/shared/components/ui/button";
 import { Input } from "@/shared/components/ui/input";
+import { coachRoutes } from "@/shared/navigation";
 
 type LoginFormData = {
   email: string;

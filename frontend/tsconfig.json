@@ -28,7 +28,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
-    "**/*.mts"
-, "src/shared/components/layout/server/GuestLayoutWrapper"  ],
+    "**/*.mts",
+    "src/shared/components/layout/server/GuestLayoutWrapper"
+  ],
   "exclude": ["node_modules"]
 }

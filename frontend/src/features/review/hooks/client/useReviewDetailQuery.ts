@@ -9,4 +9,3 @@ export function useReviewDetailQuery(id: number) {
     enabled: !!id,
   });
 }
-

@@ -1,5 +1,8 @@
 import { z } from "zod";
-import { lessonTimeOptions, type LessonTimeOption } from "@/features/lesson/common/constants";
+import {
+  type LessonTimeOption,
+  lessonTimeOptions,
+} from "@/features/lesson/common/constants";
 
 // 2ヶ月後の月末を取得する関数
 const getTwoMonthsLaterEndOfMonth = (): Date => {
@@ -46,14 +49,10 @@ export const lessonFormSchema = z.object({
   lesson_time: z
     .string()
     .min(1, "レッスン時間は必須です")
-    .refine(
-      (time) =>
-        lessonTimeOptions.includes(time as LessonTimeOption),
-      {
-        message:
-          "レッスン時間は9:00、11:00、13:00、15:00、17:00、19:00から選択してください",
-      },
-    ),
+    .refine((time) => lessonTimeOptions.includes(time as LessonTimeOption), {
+      message:
+        "レッスン時間は9:00、11:00、13:00、15:00、17:00、19:00から選択してください",
+    }),
   lesson_location: z
     .union([
       z.string().max(50, "レッスン場所は50文字以内で入力してください"),

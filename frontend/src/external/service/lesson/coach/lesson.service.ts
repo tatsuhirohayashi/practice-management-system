@@ -1,12 +1,10 @@
 import type {
+  CancelReservedLessonResponse,
   NotReservationResponse,
   NotReservedLessonListType,
+  ReservedLessonListType,
   ReserveLessonRequest,
   ReserveLessonResponse,
-} from "@/features/lesson/type";
-import type {
-  CancelReservedLessonResponse,
-  ReservedLessonListType,
 } from "@/features/lesson/type";
 import { getAxiosInstance } from "@/shared/api/axios-instance";
 

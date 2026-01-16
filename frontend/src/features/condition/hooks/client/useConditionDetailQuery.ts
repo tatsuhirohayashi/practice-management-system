@@ -9,4 +9,3 @@ export function useConditionDetailQuery(id: number) {
     enabled: !!id,
   });
 }
-

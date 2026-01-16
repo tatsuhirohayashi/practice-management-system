@@ -58,7 +58,7 @@ export function useLessonNotReservedList() {
       // 同じ日時かどうかをチェック（ISO datetime stringを比較）
       const selectedLessonDate = new Date(selectedLesson.lesson_day);
       const reservedLessonDate = new Date(reservedLesson.lesson_day);
-      
+
       // 日付と時間（分まで）が同じかチェック
       return (
         selectedLessonDate.getFullYear() === reservedLessonDate.getFullYear() &&
@@ -133,4 +133,3 @@ export function useLessonNotReservedList() {
     handleNotReserve,
   };
 }
-

@@ -1,12 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import type { ReservedLessonType } from "@/features/lesson/type";
 import { useCancelReservedLessonMutation } from "@/features/lesson/hooks/client/useCancelReservedLessonMutation";
-import { useLessonReservedListQuery } from "@/features/lesson/hooks/client/useLessonReservedListQuery";
 import { useConfirmReservedLessonMutation } from "@/features/lesson/hooks/client/useConfirmReservedLessonMutation";
+import { useLessonReservedListQuery } from "@/features/lesson/hooks/client/useLessonReservedListQuery";
 import { useUncancelReservedLessonMutation } from "@/features/lesson/hooks/client/useUncancelReservedLessonMutation";
 import { useUnconfirmReservedLessonMutation } from "@/features/lesson/hooks/client/useUnconfirmReservedLessonMutation";
+import type { ReservedLessonType } from "@/features/lesson/type";
 
 export function useLessonReservedList() {
   const { data, isLoading } = useLessonReservedListQuery();
@@ -14,9 +14,12 @@ export function useLessonReservedList() {
   const unconfirmMutation = useUnconfirmReservedLessonMutation();
   const cancelMutation = useCancelReservedLessonMutation();
   const uncancelMutation = useUncancelReservedLessonMutation();
-  const [selectedLesson, setSelectedLesson] = useState<ReservedLessonType | null>(null);
+  const [selectedLesson, setSelectedLesson] =
+    useState<ReservedLessonType | null>(null);
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
-  const [modalType, setModalType] = useState<"confirm" | "unconfirm" | "cancel" | "uncancel">("confirm");
+  const [modalType, setModalType] = useState<
+    "confirm" | "unconfirm" | "cancel" | "uncancel"
+  >("confirm");
 
   const handleOpenModal = (
     lesson: ReservedLessonType,
@@ -86,4 +89,3 @@ export function useLessonReservedList() {
     handleUncancel,
   };
 }
-

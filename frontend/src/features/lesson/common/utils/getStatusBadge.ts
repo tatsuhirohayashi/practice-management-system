@@ -1,9 +1,9 @@
 import type { NotReservedLessonType, ReservedLessonType } from "../../type";
 import {
-  RESERVED_LESSON_STATUS,
-  NOT_RESERVED_LESSON_STATUS,
-  COACH_RESERVED_LESSON_STATUS,
   COACH_NOT_RESERVED_LESSON_STATUS,
+  COACH_RESERVED_LESSON_STATUS,
+  NOT_RESERVED_LESSON_STATUS,
+  RESERVED_LESSON_STATUS,
   type StatusBadge,
 } from "../constants/lessonStatus";
 
@@ -77,4 +77,3 @@ export function getCoachNotReservedLessonStatusBadge(
   }
   return COACH_NOT_RESERVED_LESSON_STATUS.NOT_RESERVED;
 }
-

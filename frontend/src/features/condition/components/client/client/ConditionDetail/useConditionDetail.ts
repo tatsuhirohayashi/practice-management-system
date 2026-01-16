@@ -84,4 +84,3 @@ export function useConditionDetail(conditionId: number) {
     handleEditClick,
   };
 }
-

@@ -3,18 +3,15 @@
 import Link from "next/link";
 import type { useForm } from "react-hook-form";
 import type { ConditionDetailType } from "@/features/condition/type";
+import { skillOptions } from "@/features/review/common/constants";
 import type { ReviewDetailType } from "@/features/review/type";
 import { FormLabel } from "@/shared/components/custom";
-import { clientRoutes } from "@/shared/navigation";
-import { formatUserNameFromUser } from "@/shared/lib/user";
-import { formatLessonDetailDateTime } from "@/shared/lib/date";
-import { ConditionRatingItem } from "../../ConditionRatingItem/ConditionRatingItem";
 import { Button } from "@/shared/components/ui/button";
-import { Input } from "@/shared/components/ui/input";
-import { Controller } from "react-hook-form";
-import { Slider } from "@/shared/components/ui/slider";
 import { Textarea } from "@/shared/components/ui/textarea";
-import { skillOptions } from "@/features/review/common/constants";
+import { formatLessonDetailDateTime } from "@/shared/lib/date";
+import { formatUserNameFromUser } from "@/shared/lib/user";
+import { clientRoutes } from "@/shared/navigation";
+import { ConditionRatingItem } from "../../ConditionRatingItem/ConditionRatingItem";
 import { ReviewRadioGroupField } from "../ReviewRadioGroupField/ReviewRadioGroupField";
 import { ReviewSliderField } from "../ReviewSliderField/ReviewSliderField";
 
@@ -62,7 +59,10 @@ export function ReviewDetailPresenter({
 
   return (
     <div className="px-12 py-2">
-      <Link href={clientRoutes.review.list} className="text-blue-500 mb-4 inline-block text-lg">
+      <Link
+        href={clientRoutes.review.list}
+        className="text-blue-500 mb-4 inline-block text-lg"
+      >
         ↩︎戻る
       </Link>
       <h1 className="text-3xl font-bold mb-2">○振り返り詳細</h1>
@@ -108,7 +108,9 @@ export function ReviewDetailPresenter({
             {/* 備考 */}
             <div className="space-y-2">
               <span className="text-base">○備考</span>
-              <p className="text-base">{conditionDetail.condition_memo || ""}</p>
+              <p className="text-base">
+                {conditionDetail.condition_memo || ""}
+              </p>
             </div>
           </>
         )}

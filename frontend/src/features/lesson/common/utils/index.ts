@@ -1,13 +1,12 @@
 export {
-  getReservedLessonStatusBadge,
-  getNotReservedLessonStatusBadge,
-  getCoachReservedLessonStatusBadge,
   getCoachNotReservedLessonStatusBadge,
+  getCoachReservedLessonStatusBadge,
+  getNotReservedLessonStatusBadge,
+  getReservedLessonStatusBadge,
 } from "./getStatusBadge";
 export {
-  separateLessonDateTime,
   combineLessonDateTime,
   formatLessonDate,
   formatLessonTimeRange,
+  separateLessonDateTime,
 } from "./lessonDateTime";
-

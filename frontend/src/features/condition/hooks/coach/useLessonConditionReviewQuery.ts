@@ -9,4 +9,3 @@ export function useLessonConditionReviewQuery(id: number) {
     enabled: !!id,
   });
 }
-

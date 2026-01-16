@@ -40,14 +40,14 @@ export function formatLessonDetailDateTime(isoDateTime: string): string {
 export function getDaysUntilLesson(lessonDay: string): number {
   const lessonDate = new Date(lessonDay);
   const today = new Date();
-  
+
   // 日付のみを比較（時間を無視）
   lessonDate.setHours(0, 0, 0, 0);
   today.setHours(0, 0, 0, 0);
-  
+
   // ミリ秒の差分を日数に変換
   const diffTime = lessonDate.getTime() - today.getTime();
   const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-  
+
   return diffDays;
 }

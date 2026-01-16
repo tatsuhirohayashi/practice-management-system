@@ -50,4 +50,3 @@ export function formatUserNameFromUser(
 ): string {
   return formatUserName(user.last_name, user.first_name, options);
 }
-

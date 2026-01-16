@@ -1,18 +1,16 @@
 import type {
+  CancelReservedLessonResponse,
+  ConfirmReservedLessonResponse,
   CreateNotReservedLessonRequest,
   CreateNotReservedLessonResponse,
   CreateNotReservedLessonsRequest,
   CreateNotReservedLessonsResponse,
   NotReservedLessonListType,
-  UpdateNotReservedLessonRequest,
-  UpdateNotReservedLessonResponse,
-} from "@/features/lesson/type";
-import type {
-  CancelReservedLessonResponse,
-  ConfirmReservedLessonResponse,
   ReservedLessonListType,
   UncancelReservedLessonResponse,
   UnconfirmReservedLessonResponse,
+  UpdateNotReservedLessonRequest,
+  UpdateNotReservedLessonResponse,
 } from "@/features/lesson/type";
 import { getAxiosInstance } from "@/shared/api/axios-instance";
 

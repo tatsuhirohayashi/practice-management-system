@@ -1,8 +1,8 @@
 import "server-only";
 
 import { redirect } from "next/navigation";
-import { getSessionServer } from "./auth.server";
 import { clientRoutes, coachRoutes } from "@/shared/navigation";
+import { getSessionServer } from "./auth.server";
 
 export const requireAuthServer = async () => {
   const session = await getSessionServer();

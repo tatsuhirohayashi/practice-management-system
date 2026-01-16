@@ -15,4 +15,3 @@ export const lessonTimeOptions = [
  * レッスン時間の型
  */
 export type LessonTimeOption = (typeof lessonTimeOptions)[number];
-

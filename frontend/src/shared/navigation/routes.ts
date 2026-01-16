@@ -49,4 +49,3 @@ export const routes = {
   client: clientRoutes,
   coach: coachRoutes,
 } as const;
-

@@ -1,9 +1,9 @@
 "use client";
 
-import { Controller, type Control, type FieldErrors } from "react-hook-form";
+import { type Control, Controller, type FieldErrors } from "react-hook-form";
+import type { ReviewOption } from "@/features/review/common/constants";
 import { FormLabel } from "@/shared/components/custom";
 import { RadioGroup, RadioGroupItem } from "@/shared/components/ui/radio-group";
-import type { ReviewOption } from "@/features/review/common/constants";
 
 type ReviewFormData = {
   forehand: number;
@@ -60,36 +60,36 @@ export function ReviewRadioGroupField({
             className="flex flex-row gap-4"
             disabled={disabled}
           >
-            {options.slice().reverse().map((option) => {
-              const id = idPrefix
-                ? `${idPrefix}-${name}-${option.value}`
-                : `${name}-${option.value}`;
-              return (
-                <div
-                  key={option.value}
-                  className="flex items-center space-x-4"
-                >
-                  <RadioGroupItem
-                    value={option.value.toString()}
-                    id={id}
-                    disabled={disabled}
-                  />
-                  <label
-                    htmlFor={id}
-                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer"
+            {options
+              .slice()
+              .reverse()
+              .map((option) => {
+                const id = idPrefix
+                  ? `${idPrefix}-${name}-${option.value}`
+                  : `${name}-${option.value}`;
+                return (
+                  <div
+                    key={option.value}
+                    className="flex items-center space-x-4"
                   >
-                    {option.label}
-                  </label>
-                </div>
-              );
-            })}
+                    <RadioGroupItem
+                      value={option.value.toString()}
+                      id={id}
+                      disabled={disabled}
+                    />
+                    <label
+                      htmlFor={id}
+                      className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer"
+                    >
+                      {option.label}
+                    </label>
+                  </div>
+                );
+              })}
           </RadioGroup>
         )}
       />
-      {errorMessage && (
-        <p className="text-sm text-red-500">{errorMessage}</p>
-      )}
+      {errorMessage && <p className="text-sm text-red-500">{errorMessage}</p>}
     </div>
   );
 }
-

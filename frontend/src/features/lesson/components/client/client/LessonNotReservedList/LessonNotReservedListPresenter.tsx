@@ -6,6 +6,8 @@ import {
   type FieldErrors,
   type UseFormRegister,
 } from "react-hook-form";
+import { lessonTimeOptions } from "@/features/lesson/common/constants";
+import { getNotReservedLessonStatusBadge } from "@/features/lesson/common/utils";
 import type { NotReservedLessonType } from "@/features/lesson/type";
 import { FormLabel } from "@/shared/components/custom";
 import { BasicModal } from "@/shared/components/modal/BasicModal";
@@ -24,8 +26,6 @@ import {
 import { Textarea } from "@/shared/components/ui/textarea";
 import { formatDate, formatLessonDetailDateTime } from "@/shared/lib/date";
 import { formatUserNameFromUser } from "@/shared/lib/user";
-import { lessonTimeOptions } from "@/features/lesson/common/constants";
-import { getNotReservedLessonStatusBadge } from "@/features/lesson/common/utils";
 import type { LessonFormData } from "./schema";
 import type { DraftLesson } from "./useLessonNotReservedList";
 
@@ -52,7 +52,6 @@ interface LessonNotReservedListPresenterProps {
   onRemoveDraftLesson: (id: string) => void;
   onCreateAllDraftLessons: () => void;
 }
-
 
 export function LessonNotReservedListPresenter({
   reservedNotLessons,
@@ -101,52 +100,57 @@ export function LessonNotReservedListPresenter({
             </div>
           ) : (
             reservedNotLessons.map((reservedNotLesson) => {
-            const statusBadge = getNotReservedLessonStatusBadge(reservedNotLesson);
-            const userName = formatUserNameFromUser(reservedNotLesson.user, {
-              withHonorific: true,
-            });
+              const statusBadge =
+                getNotReservedLessonStatusBadge(reservedNotLesson);
+              const userName = formatUserNameFromUser(reservedNotLesson.user, {
+                withHonorific: true,
+              });
 
-            return (
-              <Card key={reservedNotLesson.id} className="rounded-lg border-2">
-                <CardContent className="flex items-center">
-                  {/* ステータスパート */}
-                  <div className="w-1/8 flex justify-center">
-                    <Badge className={statusBadge.className}>
-                      {statusBadge.text}
-                    </Badge>
-                  </div>
-                  {/* 予約内容パート */}
-                  <div className="flex-1 space-y-2">
-                    <div className="flex space-x-6">
-                      <div>{formatDate(reservedNotLesson.lesson_day)}</div>
-                      <div>{userName}</div>
-                      <div>{reservedNotLesson.lesson_location}</div>
+              return (
+                <Card
+                  key={reservedNotLesson.id}
+                  className="rounded-lg border-2"
+                >
+                  <CardContent className="flex items-center">
+                    {/* ステータスパート */}
+                    <div className="w-1/8 flex justify-center">
+                      <Badge className={statusBadge.className}>
+                        {statusBadge.text}
+                      </Badge>
                     </div>
-                    <div>
-                      <div>備考 {reservedNotLesson.lesson_memo}</div>
+                    {/* 予約内容パート */}
+                    <div className="flex-1 space-y-2">
+                      <div className="flex space-x-6">
+                        <div>{formatDate(reservedNotLesson.lesson_day)}</div>
+                        <div>{userName}</div>
+                        <div>{reservedNotLesson.lesson_location}</div>
+                      </div>
+                      <div>
+                        <div>備考 {reservedNotLesson.lesson_memo}</div>
+                      </div>
                     </div>
-                  </div>
-                  {/* ステータス変更パート */}
-                  {!reservedNotLesson.is_reserved && !reservedNotLesson.is_finished && (
-                    <div className="w-1/8 flex flex-col items-center gap-2">
-                      <Button
-                        className="bg-blue-400 text-sm"
-                        onClick={() => onOpenModal(reservedNotLesson.id)}
-                      >
-                        編集
-                      </Button>
-                      <Button
-                        className="bg-red-500 text-sm"
-                        onClick={() => onOpenDeleteModal(reservedNotLesson)}
-                      >
-                        削除
-                      </Button>
-                    </div>
-                  )}
-                </CardContent>
-              </Card>
-            );
-          })
+                    {/* ステータス変更パート */}
+                    {!reservedNotLesson.is_reserved &&
+                      !reservedNotLesson.is_finished && (
+                        <div className="w-1/8 flex flex-col items-center gap-2">
+                          <Button
+                            className="bg-blue-400 text-sm"
+                            onClick={() => onOpenModal(reservedNotLesson.id)}
+                          >
+                            編集
+                          </Button>
+                          <Button
+                            className="bg-red-500 text-sm"
+                            onClick={() => onOpenDeleteModal(reservedNotLesson)}
+                          >
+                            削除
+                          </Button>
+                        </div>
+                      )}
+                  </CardContent>
+                </Card>
+              );
+            })
           )}
         </div>
       </div>
@@ -156,7 +160,9 @@ export function LessonNotReservedListPresenter({
         open={isModalOpen}
         title={isEditMode ? "○レッスン候補の編集" : "○レッスン候補の作成"}
         onBack={handleCloseModal}
-        onConfirm={isEditMode ? handleSubmit(onSubmit) : onCreateAllDraftLessons}
+        onConfirm={
+          isEditMode ? handleSubmit(onSubmit) : onCreateAllDraftLessons
+        }
         onClose={handleCloseModal}
         confirmButtonText={isEditMode ? "編集" : "作成"}
         showCloseButton={false}
@@ -274,9 +280,12 @@ export function LessonNotReservedListPresenter({
                 >
                   <div className="flex-1 space-y-2">
                     <div className="text-base">
-                      {formatLessonDetailDateTime(draftLesson.lesson_day)}  {userName}  {draftLesson.lesson_location || ""}
+                      {formatLessonDetailDateTime(draftLesson.lesson_day)}{" "}
+                      {userName} {draftLesson.lesson_location || ""}
                     </div>
-                    <div className="text-base">備考 {draftLesson.lesson_memo || ""}</div>
+                    <div className="text-base">
+                      備考 {draftLesson.lesson_memo || ""}
+                    </div>
                   </div>
                   <Button
                     type="button"
@@ -307,4 +316,3 @@ export function LessonNotReservedListPresenter({
     </>
   );
 }
-

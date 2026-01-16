@@ -1,6 +1,6 @@
 "use client";
 
-import { Controller, type Control, type FieldErrors } from "react-hook-form";
+import { type Control, Controller, type FieldErrors } from "react-hook-form";
 import { FormLabel } from "@/shared/components/custom";
 import { Input } from "@/shared/components/ui/input";
 import { Slider } from "@/shared/components/ui/slider";
@@ -57,9 +57,14 @@ export function ReviewSliderField({
           max: { value: 100, message: "100以下で入力してください" },
         }}
         render={({ field }) => {
-          const isVerticalLayout = sliderClassName === "w-full" && inputClassName === "w-full";
+          const isVerticalLayout =
+            sliderClassName === "w-full" && inputClassName === "w-full";
           return (
-            <div className={isVerticalLayout ? "space-y-2" : "flex items-center space-x-4"}>
+            <div
+              className={
+                isVerticalLayout ? "space-y-2" : "flex items-center space-x-4"
+              }
+            >
               <Slider
                 value={[field.value]}
                 onValueChange={(value) => field.onChange(value[0])}
@@ -83,10 +88,7 @@ export function ReviewSliderField({
           );
         }}
       />
-      {errorMessage && (
-        <p className="text-sm text-red-500">{errorMessage}</p>
-      )}
+      {errorMessage && <p className="text-sm text-red-500">{errorMessage}</p>}
     </div>
   );
 }
-

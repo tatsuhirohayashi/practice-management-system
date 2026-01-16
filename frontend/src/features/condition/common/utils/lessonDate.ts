@@ -22,11 +22,10 @@ export function isLessonToday(lessonDay: string): boolean {
 export function isLessonTodayOrAfter(lessonDay: string): boolean {
   const lessonDate = new Date(lessonDay);
   const today = new Date();
-  
+
   // 日付のみを比較（時間を無視）
   lessonDate.setHours(0, 0, 0, 0);
   today.setHours(0, 0, 0, 0);
 
   return lessonDate.getTime() <= today.getTime();
 }
-

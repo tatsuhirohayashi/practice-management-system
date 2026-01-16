@@ -10,10 +10,15 @@ import type { ReactNode } from "react";
  * @returns 星評価のJSX要素
  */
 export function renderStars(rating: number): ReactNode {
-  return Array.from({ length: 5 }, (_, i) => (
-    <span key={i} className={i < rating ? "text-yellow-400" : "text-gray-300"}>
-      ★
-    </span>
-  ));
+  return Array.from({ length: 5 }, (_, i) => {
+    const starId = `star-${i}-${rating}`;
+    return (
+      <span
+        key={starId}
+        className={i < rating ? "text-yellow-400" : "text-gray-300"}
+      >
+        ★
+      </span>
+    );
+  });
 }
-

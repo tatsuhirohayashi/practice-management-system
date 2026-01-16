@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import type { LessonConditionReviewType } from "@/features/condition/type";
-import { formatUserNameFromUser } from "@/shared/lib/user";
 import { formatLessonDetailDateTime } from "@/shared/lib/date";
+import { formatUserNameFromUser } from "@/shared/lib/user";
 import { coachRoutes } from "@/shared/navigation";
 import { ConditionRatingItem } from "../ConditionRatingItem";
 import { ReviewProgressItem } from "../ReviewProgressItem";
@@ -49,14 +49,8 @@ export function LessonConditionReviewPresenter({
             label="○モチベーション"
             rating={condition?.motivation ?? 0}
           />
-          <ConditionRatingItem
-            label="○気分"
-            rating={condition?.feeling ?? 0}
-          />
-          <ConditionRatingItem
-            label="○疲れ"
-            rating={condition?.tired ?? 0}
-          />
+          <ConditionRatingItem label="○気分" rating={condition?.feeling ?? 0} />
+          <ConditionRatingItem label="○疲れ" rating={condition?.tired ?? 0} />
         </div>
         {/* 備考 */}
         <div className="space-y-2">
@@ -78,18 +72,9 @@ export function LessonConditionReviewPresenter({
               label="○バックハンド"
               rating={review.backhand}
             />
-            <ConditionRatingItem
-              label="○サーブ"
-              rating={review.serve}
-            />
-            <ConditionRatingItem
-              label="○ボレー"
-              rating={review.volley}
-            />
-            <ConditionRatingItem
-              label="○リターン"
-              rating={review.return}
-            />
+            <ConditionRatingItem label="○サーブ" rating={review.serve} />
+            <ConditionRatingItem label="○ボレー" rating={review.volley} />
+            <ConditionRatingItem label="○リターン" rating={review.return} />
           </div>
           <ReviewProgressItem
             label="○サーブイン"
@@ -109,4 +94,3 @@ export function LessonConditionReviewPresenter({
     </div>
   );
 }
-

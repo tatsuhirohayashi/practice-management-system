@@ -9,4 +9,3 @@ export const reserveFormSchema = z.object({
 });
 
 export type ReserveFormData = z.infer<typeof reserveFormSchema>;
-

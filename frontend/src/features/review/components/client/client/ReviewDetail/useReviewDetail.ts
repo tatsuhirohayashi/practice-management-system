@@ -118,4 +118,3 @@ export function useReviewDetail(reviewId: number) {
     handleEditClick,
   };
 }
-

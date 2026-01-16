@@ -1,10 +1,14 @@
 "use client";
 
+import type { Route } from "next";
 import Link from "next/link";
 import type { useForm } from "react-hook-form";
+import {
+  REVIEW_STATUS,
+  skillOptions,
+} from "@/features/review/common/constants";
 import type { ReviewLessonType } from "@/features/review/type";
 import { FormLabel } from "@/shared/components/custom";
-import { clientRoutes } from "@/shared/navigation";
 import { BasicModal } from "@/shared/components/modal/BasicModal";
 import { Badge } from "@/shared/components/ui/badge";
 import { Button } from "@/shared/components/ui/button";
@@ -13,7 +17,7 @@ import { Skeleton } from "@/shared/components/ui/skeleton";
 import { Textarea } from "@/shared/components/ui/textarea";
 import { formatDate, formatLessonDetailDateTime } from "@/shared/lib/date";
 import { formatUserNameFromUser } from "@/shared/lib/user";
-import { skillOptions, REVIEW_STATUS } from "@/features/review/common/constants";
+import { clientRoutes } from "@/shared/navigation";
 import { ReviewRadioGroupField } from "../ReviewRadioGroupField/ReviewRadioGroupField";
 import { ReviewSliderField } from "../ReviewSliderField/ReviewSliderField";
 
@@ -57,17 +61,17 @@ const getActionButton = (
 ) => {
   if (lesson.has_review && lesson.review_id) {
     return (
-      <Link href={clientRoutes.review.detail(lesson.review_id)}>
+      <Link href={clientRoutes.review.detail(lesson.review_id) as Route}>
         <Button className="bg-blue-500 text-sm text-white">詳細</Button>
       </Link>
     );
   }
-  
+
   // レッスンが終了している場合のみ「記載」ボタンを表示
   if (!lesson.is_finished) {
     return null;
   }
-  
+
   return (
     <Button
       className="bg-blue-500 text-sm text-white"
@@ -103,8 +107,11 @@ export function ReviewListPresenter({
         <div className="flex-1 space-y-4">
           {isLoading ? (
             // スケルトンローディング
-            Array.from({ length: 6 }).map((_, index) => (
-              <Card key={`skeleton-${index}`} className="rounded-lg border-2">
+            Array.from({ length: 6 }, () => (
+              <Card
+                key={`skeleton-${crypto.randomUUID()}`}
+                className="rounded-lg border-2"
+              >
                 <CardContent className="flex items-center">
                   {/* ステータスパート */}
                   <div className="w-1/8 flex justify-center">
@@ -134,39 +141,39 @@ export function ReviewListPresenter({
             </div>
           ) : (
             reviewLessons.map((reviewLesson) => {
-            const statusBadge = getStatusBadge(reviewLesson);
-            const userName = formatUserNameFromUser(reviewLesson.user, {
-              withHonorific: true,
-            });
+              const statusBadge = getStatusBadge(reviewLesson);
+              const userName = formatUserNameFromUser(reviewLesson.user, {
+                withHonorific: true,
+              });
 
-            return (
-              <Card key={reviewLesson.id} className="rounded-lg border-2">
-                <CardContent className="flex items-center">
-                  {/* ステータスパート */}
-                  <div className="w-1/8 flex justify-center">
-                    <Badge className={statusBadge.className}>
-                      {statusBadge.text}
-                    </Badge>
-                  </div>
-                  {/* 予約内容パート */}
-                  <div className="flex-1 space-y-2">
-                    <div className="flex space-x-6">
-                      <div>{formatDate(reviewLesson.lesson_day)}</div>
-                      <div>{userName}</div>
-                      <div>{reviewLesson.lesson_location}</div>
+              return (
+                <Card key={reviewLesson.id} className="rounded-lg border-2">
+                  <CardContent className="flex items-center">
+                    {/* ステータスパート */}
+                    <div className="w-1/8 flex justify-center">
+                      <Badge className={statusBadge.className}>
+                        {statusBadge.text}
+                      </Badge>
                     </div>
-                    <div>
-                      <div>備考 {reviewLesson.lesson_memo || ""}</div>
+                    {/* 予約内容パート */}
+                    <div className="flex-1 space-y-2">
+                      <div className="flex space-x-6">
+                        <div>{formatDate(reviewLesson.lesson_day)}</div>
+                        <div>{userName}</div>
+                        <div>{reviewLesson.lesson_location}</div>
+                      </div>
+                      <div>
+                        <div>備考 {reviewLesson.lesson_memo || ""}</div>
+                      </div>
                     </div>
-                  </div>
-                  {/* アクションボタンパート */}
-                  <div className="w-1/8 flex justify-center">
-                    {getActionButton(reviewLesson, openCreateModal)}
-                  </div>
-                </CardContent>
-              </Card>
-            );
-          })
+                    {/* アクションボタンパート */}
+                    <div className="w-1/8 flex justify-center">
+                      {getActionButton(reviewLesson, openCreateModal)}
+                    </div>
+                  </CardContent>
+                </Card>
+              );
+            })
           )}
         </div>
       </div>
@@ -279,4 +286,3 @@ export function ReviewListPresenter({
     </>
   );
 }
-

@@ -61,22 +61,16 @@ export function ConfirmModal({
           {/* レッスン詳細情報 */}
           <div className="border-2 border-black px-4 py-4 space-y-2 bg-white">
             <div className="text-base">
-              {dateTimeDisplay}  {userName}  {lesson.lesson_location}
+              {dateTimeDisplay} {userName} {lesson.lesson_location}
             </div>
             <div className="text-base">備考 {lesson.lesson_memo || "~"}</div>
           </div>
         </div>
         <DialogFooter className="flex-row justify-between gap-2">
-          <Button
-            className="bg-gray-400 text-white flex-1"
-            onClick={onBack}
-          >
+          <Button className="bg-gray-400 text-white flex-1" onClick={onBack}>
             {backButtonText}
           </Button>
-          <Button
-            className="bg-blue-500 text-white flex-1"
-            onClick={onConfirm}
-          >
+          <Button className="bg-blue-500 text-white flex-1" onClick={onConfirm}>
             {confirmButtonText}
           </Button>
         </DialogFooter>
@@ -84,4 +78,3 @@ export function ConfirmModal({
     </Dialog>
   );
 }
-

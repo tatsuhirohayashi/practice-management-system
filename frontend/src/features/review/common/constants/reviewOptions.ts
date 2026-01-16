@@ -40,4 +40,3 @@ export const REVIEW_STATUS = {
     className: "bg-gray-400 text-base",
   },
 } as const satisfies Record<string, StatusBadge>;
-

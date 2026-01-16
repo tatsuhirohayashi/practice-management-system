@@ -1,2 +1,1 @@
-export { routes, clientRoutes, coachRoutes } from "./routes";
-
+export { clientRoutes, coachRoutes, routes } from "./routes";

@@ -1,9 +1,9 @@
 "use client";
 
-import { Controller, type Control, type FieldErrors } from "react-hook-form";
+import { type Control, Controller, type FieldErrors } from "react-hook-form";
+import type { ConditionOption } from "@/features/condition/common/constants";
 import { FormLabel } from "@/shared/components/custom";
 import { RadioGroup, RadioGroupItem } from "@/shared/components/ui/radio-group";
-import type { ConditionOption } from "@/features/condition/common/constants";
 
 type ConditionFormData = {
   musle_pain: number;
@@ -62,10 +62,7 @@ export function ConditionRadioGroupField({
                 ? `${idPrefix}-${name}-${option.value}`
                 : `${name}-${option.value}`;
               return (
-                <div
-                  key={option.value}
-                  className="flex items-center space-x-4"
-                >
+                <div key={option.value} className="flex items-center space-x-4">
                   <RadioGroupItem
                     value={option.value.toString()}
                     id={id}
@@ -83,10 +80,7 @@ export function ConditionRadioGroupField({
           </RadioGroup>
         )}
       />
-      {errorMessage && (
-        <p className="text-sm text-red-500">{errorMessage}</p>
-      )}
+      {errorMessage && <p className="text-sm text-red-500">{errorMessage}</p>}
     </div>
   );
 }
-

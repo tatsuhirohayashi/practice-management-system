@@ -67,4 +67,3 @@ export function formatLessonTimeRange(
   const endHour = startHour + durationHours;
   return `${String(startHour).padStart(2, "0")}:00~${String(endHour).padStart(2, "0")}:00`;
 }
-

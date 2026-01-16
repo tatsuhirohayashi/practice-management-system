@@ -5,8 +5,10 @@ import {
   fetchCoachReservedLesson,
 } from "@/external/service/lesson/coach/lesson.service";
 import { withAuth } from "@/features/auth/servers/auth.guard";
-import type { NotReservedLessonListType } from "@/features/lesson/type";
-import type { ReservedLessonListType } from "@/features/lesson/type";
+import type {
+  NotReservedLessonListType,
+  ReservedLessonListType,
+} from "@/features/lesson/type";
 
 export const listCoachReservedLessonQuery =
   (): Promise<ReservedLessonListType> => {
